@@ -1,0 +1,70 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Recuperation du code
+        uses: actions/checkout@v4
+
+      - name: Configuration Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Installation des dependances
+        run: npm ci
+
+      - name: Verification du code (Lint)
+        run: npm run lint
+
+      - name: Verification des types (TypeScript)
+        run: npx tsc --noEmit
+
+  android-build:
+    name: Build Android (EAS Cloud)
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Recuperation du code
+        uses: actions/checkout@v4
+
+      - name: Configuration Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Installation des dependances
+        run: npm ci
+
+      - name: Configuration EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Build Android sur Expo Cloud
+        id: eas-build
+        run: |
+          BUILD_JSON=$(eas build --platform android --profile preview --non-interactive --json)
+          echo "Build output: $BUILD_JSON"
+          APK_URL=$(echo $BUILD_JSON | jq -r '.[0].artifacts.buildUrl')
+          echo "apk_url=$APK_URL" >> $GITHUB_OUTPUT
+
+      - name: Telecharger l'APK
+        run: |
+          curl -L -o app-release.apk "${{ steps.eas-build.outputs.apk_url }}"
+
+      - name: Upload de l'APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release
+          path: app-release.apk

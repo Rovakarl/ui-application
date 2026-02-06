@@ -1,0 +1,21 @@
+# Exclude node_modules (will be installed in Docker)
+node_modules/
+
+# Exclude build artifacts
+dist/
+web-build/
+*.apk
+*.aab
+
+# Exclude local env files
+.env*.local
+
+# Exclude IDE files
+.vscode/
+.idea/
+
+# Exclude temp files
+*.log
+.DS_Store
+
+# DO NOT exclude .git - EAS needs it for local builds
