@@ -94,7 +94,8 @@ flowchart LR
 1. Faites un `push` sur la branche `main`
 2. Le workflow CI/CD se déclenche automatiquement
 3. Attendez ~10-20 min
-4. Téléchargez l'APK depuis **GitHub Actions > Artifacts** ou directement sur [expo.dev](https://expo.dev)
+4. Téléchargez l'APK depuis **GitHub Actions > Artifacts** ou directement sur [expo.dev](https://expo.dev) 
+
 
 ---
 

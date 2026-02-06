@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "pipCam",
-    "slug": "ui",
+    "slug": "devops",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -55,9 +55,9 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "9c060f0b-41f4-420d-bf7a-508f3aa7c22a"
+        "projectId": "a60bfafa-e324-43c2-aed5-e8d88c902d26"
       }
     },
-    "owner": "demondra"
+    "owner": "rovakarl"
   }
 }
