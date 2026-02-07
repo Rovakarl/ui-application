@@ -1,19 +1,19 @@
-import React, { useState, useRef } from "react";
+import { Ionicons } from "@expo/vector-icons";
 import {
-  View,
-  TouchableOpacity,
-  Modal,
-  StyleSheet,
-  Alert,
-  ActivityIndicator,
-} from "react-native";
-import {
-  CameraView,
   CameraType,
+  CameraView,
   useCameraPermissions,
 } from "expo-camera";
 import * as ImageManipulator from "expo-image-manipulator";
-import { Ionicons } from "@expo/vector-icons";
+import React, { useRef, useState } from "react";
+import {
+  ActivityIndicator,
+  Alert,
+  Modal,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 interface NativeCameraProps {
   onImageCaptured: (imageUri: string) => void;
@@ -39,7 +39,7 @@ export default function NativeCamera({
       if (!result.granted) {
         Alert.alert(
           "Permission requise",
-          "L'application a besoin d'accéder à votre caméra."
+          "L'application a besoin d'accéder à votre caméra svp ."
         );
         return;
       }
