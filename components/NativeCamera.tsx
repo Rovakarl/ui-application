@@ -39,7 +39,7 @@ export default function NativeCamera({
       if (!result.granted) {
         Alert.alert(
           "Permission requise",
-          "L'application a besoin d'accéder à votre caméra svp."
+          "L'application a besoin d'accéder à votre caméra sv."
         );
         return;
       }
